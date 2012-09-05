@@ -126,8 +126,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CassandraCqlRowSchema.cs" />
+    <Compile Include="CqlHelper.cs" />
     <Compile Include="FluentCqlRow.cs" />
-    <Compile Include="ObjectSerializer\ObjectSerializerConventions.cs" />
+    <Compile Include="ILoadable.cs" />
     <Compile Include="System\DateTimePrecise.cs" />
     <Compile Include="FluentCassandraException.cs" />
     <Compile Include="FluentColumn.cs">
@@ -252,6 +253,7 @@
     <Compile Include="Thrift\Transport\TTransport.cs" />
     <Compile Include="Thrift\Transport\TTransportException.cs" />
     <Compile Include="Thrift\Transport\TTransportFactory.cs" />
+    <Compile Include="TimestampHelper.cs" />
     <Compile Include="Types\AsciiType.cs" />
     <Compile Include="Types\AsciiTypeConverter.cs" />
     <Compile Include="System\Numerics\BigDecimal.cs" />

@@ -14,6 +14,7 @@ namespace FluentCassandra
 	{
 		private readonly IList<IFluentMutationTracker> _trackers;
 		private CassandraSession _session;
+		private readonly bool _isOutsideSession = false;
 
 		/// <summary>
 		/// 
@@ -50,6 +51,7 @@ namespace FluentCassandra
 			: this(session.ConnectionBuilder)
 		{
 			_session = session;
+			_isOutsideSession = true;
 		}
 
 		/// <summary>
@@ -72,7 +74,15 @@ namespace FluentCassandra
 		/// <typeparam name="CompareWith"></typeparam>
 		/// <returns></returns>
 		public CassandraColumnFamily GetColumnFamily(string columnFamily)
-		{
+		{		    
+			if(Keyspace != null)
+			{
+				var schema = Keyspace.GetColumnFamilySchema(columnFamily);
+
+				if(schema != null)
+					return new CassandraColumnFamily(this, schema);
+			}
+         
 			return new CassandraColumnFamily(this, columnFamily);
 		}
 
@@ -83,6 +93,14 @@ namespace FluentCassandra
 		/// <returns></returns>
 		public CassandraSuperColumnFamily GetSuperColumnFamily(string columnFamily)
 		{
+			if (Keyspace != null)
+			{
+				var schema = Keyspace.GetColumnFamilySchema(columnFamily);
+
+				if (schema != null)
+					return new CassandraSuperColumnFamily(this, schema);
+			}
+
 			return new CassandraSuperColumnFamily(this, columnFamily);
 		}
 
@@ -399,7 +417,7 @@ namespace FluentCassandra
 		/// </param>
 		protected virtual void Dispose(bool disposing)
 		{
-			if (!WasDisposed && disposing && _session != null)
+			if (!WasDisposed && !_isOutsideSession && disposing && _session != null)
 			{
 				_session.Dispose();
 				_session = null;

@@ -38,7 +38,6 @@ namespace FluentCassandra
 			FamilyName = columnFamily;
 
 			_columns = new FluentColumnList<FluentSuperColumn>(GetSelf());
-
 		}
 
 		/// <summary>
@@ -74,7 +73,28 @@ namespace FluentCassandra
 		/// <summary>
 		/// 
 		/// </summary>
-		public ColumnType ColumnType { get { return ColumnType.Standard; } }
+		public ColumnType ColumnType { get { return ColumnType.Super; } }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="columnName"></param>
+		/// <returns></returns>
+		public FluentSuperColumn this[CassandraObject columnName]
+		{
+			get
+			{
+				object value;
+				if (!TryGetColumn(columnName, out value))
+					throw new CassandraException(String.Format("Super Column, {0}, could not be found.", columnName));
+
+				return (FluentSuperColumn)value;
+			}
+			set
+			{
+				TrySetColumn(columnName, value);
+			}
+		}
 
 		/// <summary>
 		/// 
@@ -229,6 +249,11 @@ namespace FluentCassandra
 			OnColumnMutated(mutationType, col);
 
 			return true;
+		}
+
+		public override string ToString()
+		{
+			return String.Format("{0} - {1}", FamilyName, Key);
 		}
 	}
 }
