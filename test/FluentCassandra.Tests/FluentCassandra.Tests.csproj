@@ -58,7 +58,6 @@
     <Compile Include="Bugs\Issue39CompositeTypeAsKey.cs" />
     <Compile Include="CassandraDatabaseSetupFixture.cs" />
     <Compile Include="CassandraQueryTest.cs" />
-    <Compile Include="CqlHelperTest.cs" />
     <Compile Include="CompatibilityCassandraDatabaseSetup.cs" />
     <Compile Include="Connections\ConnectionProviderTests.cs" />
     <Compile Include="Connections\NormalConnectionProviderTests.cs" />
