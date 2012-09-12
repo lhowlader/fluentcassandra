@@ -5,7 +5,7 @@ using FluentCassandra.Types;
 using FluentCassandra.Linq;
 using System.Collections.Generic;
 using System.Configuration;
-
+using FluentCassandra;
 
 namespace FluentCassandra.Sandbox
 {
@@ -460,7 +460,7 @@ namespace FluentCassandra.Sandbox
             }
         }
         #endregion
-        
+
         private static void Main(string[] args)
         {
             SetupKeyspace();

@@ -106,7 +106,9 @@
     <Compile Include="CassandraSuperColumnFamilyOperations.cs" />
     <Compile Include="CassandraSuperColumnFamily.cs" />
     <Compile Include="CassandraTokenRange.cs" />
-    <Compile Include="CqlHelper.cs" />
+    <Compile Include="CircuitBreaker\CircuitBreaker.cs" />
+    <Compile Include="CircuitBreaker\OperationFailedException.cs" />
+    <Compile Include="CircuitBreaker\OpenCircuitException.cs" />
     <Compile Include="Connections\CassandraConnectionException.cs" />
     <Compile Include="Connections\Connection.cs" />
     <Compile Include="Connections\ConnectionBuilder.cs" />
